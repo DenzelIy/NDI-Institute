@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Niger Delta Institute of Digital Technology"
+description = "A responsive admissions and programme website for Niger Delta Institute of Digital Technology, featuring January 2027 certificate programmes and an honest diploma pathway interest register."
+version = "1.0.0"
+id = "artifacts/ndi-digital-institute"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20960
+
+[services.development]
+run = "pnpm --filter @workspace/ndi-digital-institute run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ndi-digital-institute", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/ndi-digital-institute/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20960"
+BASE_PATH = "/"
